@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        CheckBookService service1 = context.getBean(CheckBookService.class);
-        CheckBook checkBook = service1.getCheckBook("test1.csv");
+        CheckBookService service = context.getBean(CheckBookService.class);
+        CheckBook checkBook = service.getCheckBook("test.csv");
         for(CheckUnit checkUnit : checkBook.getCheckUnits() ) {
             System.out.println(checkUnit.toString());
         }

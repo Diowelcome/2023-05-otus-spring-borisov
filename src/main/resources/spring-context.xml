@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="checkBookDao" class="ru.otus.junit.dao.CheckBookDaoSimple">
-        <property name="fileName" value="test1.csv"/>
+        <property name="fileName" value="test.csv"/>
     </bean>
 
     <bean id="checkBookService" class="ru.otus.junit.service.CheckBookServiceImpl">
