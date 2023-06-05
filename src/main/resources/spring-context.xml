@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="checkBookDao" class="ru.otus.junit.dao.CheckBookDaoSimple">
+    <bean id="checkBookDao" class="ru.otus.spring.dao.CheckBookDaoSimple">
         <property name="fileName" value="test.csv"/>
     </bean>
 
-    <bean id="checkBookService" class="ru.otus.junit.service.CheckBookServiceImpl">
+    <bean id="checkBookService" class="ru.otus.spring.service.CheckBookServiceImpl">
         <constructor-arg index="0" ref="checkBookDao"/>
     </bean>
 

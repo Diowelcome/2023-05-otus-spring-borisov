@@ -1,7 +1,7 @@
-package ru.otus.junit.service;
+package ru.otus.spring.service;
 
-import ru.otus.junit.dao.CheckBookDao;
-import ru.otus.junit.domain.CheckBook;
+import ru.otus.spring.dao.CheckBookDao;
+import ru.otus.spring.domain.CheckBook;
 
 
 public class CheckBookServiceImpl implements CheckBookService {

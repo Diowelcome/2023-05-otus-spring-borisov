@@ -1,9 +1,9 @@
-package ru.otus.junit;
+package ru.otus.spring;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.junit.domain.CheckBook;
-import ru.otus.junit.domain.CheckUnit;
-import ru.otus.junit.service.CheckBookService;
+import ru.otus.spring.domain.CheckBook;
+import ru.otus.spring.domain.CheckUnit;
+import ru.otus.spring.service.CheckBookService;
 
 public class Main {
 

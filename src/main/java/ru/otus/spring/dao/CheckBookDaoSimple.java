@@ -1,9 +1,9 @@
-package ru.otus.junit.dao;
+package ru.otus.spring.dao;
 
 import org.springframework.core.io.ClassPathResource;
-import ru.otus.junit.domain.Answer;
-import ru.otus.junit.domain.CheckBook;
-import ru.otus.junit.domain.CheckUnit;
+import ru.otus.spring.domain.Answer;
+import ru.otus.spring.domain.CheckBook;
+import ru.otus.spring.domain.CheckUnit;
 
 import java.io.File;
 import java.io.FileReader;

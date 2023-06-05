@@ -1,4 +1,4 @@
-package ru.otus.junit.domain;
+package ru.otus.spring.domain;
 
 public class Answer {
 

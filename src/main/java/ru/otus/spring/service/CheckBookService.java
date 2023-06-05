@@ -1,6 +1,6 @@
-package ru.otus.junit.service;
+package ru.otus.spring.service;
 
-import ru.otus.junit.domain.CheckBook;
+import ru.otus.spring.domain.CheckBook;
 
 public interface CheckBookService {
     CheckBook getCheckBook(String fileName);
