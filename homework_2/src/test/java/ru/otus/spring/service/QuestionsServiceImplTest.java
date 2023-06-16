@@ -49,12 +49,12 @@ class QuestionsServiceImplTest {
     @Test
     void shouldReturnCorrectQuestions() {
         when(questionsDao.getQuestions()).thenReturn(testQuestions);
-        List<Question> testQuestions = questionsService.getQuestions();
+        List<Question> questions = questionsService.getQuestions();
         assertAll(
                 "questions",
-                () -> assertEquals(testQuestions.size(), 1, "should be 1 question"),
-                () -> assertEquals(testQuestions.get(0).getAnswer(0).getRightFlag(), 1, "first question should be right"),
-                () -> assertEquals(testQuestions.get(0).getAnswer(1).getRightFlag(), 0, "first question should be wrong")
+                () -> assertEquals(questions.size(), 1, "should be 1 question"),
+                () -> assertEquals(questions.get(0).getAnswer(0).getRightFlag(), 1, "first question should be right"),
+                () -> assertEquals(questions.get(0).getAnswer(1).getRightFlag(), 0, "first question should be wrong")
         );
     }
 
