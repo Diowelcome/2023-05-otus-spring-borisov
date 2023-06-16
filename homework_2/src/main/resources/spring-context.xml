@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="checkBookDao" class="ru.otus.spring.dao.QuestionsDaoSimple">
+        <property name="fileName" value="test.csv"/>
+    </bean>
+
+    <bean id="checkBookService" class="ru.otus.spring.service.QuestionsServiceImpl">
+        <constructor-arg index="0" ref="checkBookDao"/>
+    </bean>
+
+</beans>
