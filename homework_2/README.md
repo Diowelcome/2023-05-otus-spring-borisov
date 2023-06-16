@@ -15,12 +15,12 @@
 2. Реализация слоев dao и service
      - QuestionDao: чтение и парсинг строки разделены на два шага
 	 - QuestionService: 
-          - getQuestions  - читает данные из dao
-		  - showQuestions - отображает полученные данные 
+         - getQuestions  - читает данные из dao
+         - showQuestions - отображает полученные данные 
 		  
-		  Добавлены методы
-		  - runQuestions       - формирует на выходе класс TestRun
-		  - showTestRunResults - отображает результаты по данным объекта TestRun
+         Добавлены методы
+         - runQuestions       - формирует на выходе класс TestRun
+         - showTestRunResults - отображает результаты по данным объекта TestRun
 		  
 	 - IOService - новый сервис ввода-вывода
 
