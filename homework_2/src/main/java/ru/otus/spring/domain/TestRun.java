@@ -1,9 +1,5 @@
 package ru.otus.spring.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,17 +25,17 @@ public class TestRun {
     }
 
     public Person getPerson() {
-        return this.person;
+        return person;
     }
 
     public int getPercentScore() {
-        return this.percentScore;
+        return percentScore;
     }
 
     public String getBriefResult() {
         int maxScore = 5;
-        Boolean testPassed = this.percentScore >= 50;
-        Boolean goodResult = this.percentScore >= 70;
+        Boolean testPassed = percentScore >= 50;
+        Boolean goodResult = percentScore >= 70;
         String greetingString = getGreetingString(person, testPassed, goodResult);
         String scoreString = getScoreString(percentScore, maxScore);
         String passedString = getPassedString(testPassed);

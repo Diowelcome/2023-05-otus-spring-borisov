@@ -6,7 +6,6 @@ import ru.otus.spring.domain.Answer;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.domain.Question;
 import ru.otus.spring.domain.TestRun;
-import ru.otus.spring.service.PersonService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -29,6 +29,7 @@
      - Первое задание оставлено в классе Main в закомментированном состоянии
 
 2. Unit тесты
-     Добавлено два Unit теста класса QuestionsServiceImpl с использованием Mock QuestionsDao и ioService:
+     Добавлено два Unit теста класса QuestionsServiceImpl 
+     с использованием Mock QuestionsDao, PersonService и ioService:
 	 - тестирование метода getQuestions
 	 - тестирование метода runQuestions
