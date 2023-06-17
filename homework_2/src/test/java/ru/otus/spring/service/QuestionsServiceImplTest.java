@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @DisplayName("Класс QuestionsServiceImpl")
@@ -29,6 +30,9 @@ class QuestionsServiceImplTest {
 
     @Mock
     private IOService ioService;
+
+    @Mock
+    private PersonService personService;
 
     @Mock
     private QuestionsDao questionsDao;
@@ -61,12 +65,9 @@ class QuestionsServiceImplTest {
     @DisplayName("метод runQuestions должен корректно рассчитывать результат теста")
     @Test
     void shouldReturnCorrectResult() {
-        String typeYourAnswerString = "Type right number or numbers, separated by commas (for example: 1 or 1,3):";
-        String promptLine = String.format("%s\n%s", testQuestions.get(0).toString(), typeYourAnswerString);
         when(questionsDao.getQuestions()).thenReturn(testQuestions);
-        when(ioService.readStringWithPrompt("Enter your first name:")).thenReturn(testPerson.getFirstName());
-        when(ioService.readStringWithPrompt("Enter your last name:")).thenReturn(testPerson.getLastName());
-        when(ioService.readStringWithPrompt(promptLine)).thenReturn(Integer.toString(rightAnswerIndex));
+        when(personService.inputPerson()).thenReturn(testPerson);
+        when(ioService.readStringWithPrompt(anyString())).thenReturn(Integer.toString(rightAnswerIndex));
         TestRun testRun = questionsService.runQuestions();
         assertAll(
                 "testRun",

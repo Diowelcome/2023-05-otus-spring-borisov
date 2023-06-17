@@ -6,6 +6,7 @@ import ru.otus.spring.domain.Answer;
 import ru.otus.spring.domain.Person;
 import ru.otus.spring.domain.Question;
 import ru.otus.spring.domain.TestRun;
+import ru.otus.spring.service.PersonService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,10 +21,12 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     private final QuestionsDao dao;
     private final IOService ioService;
+    private final PersonService personService;
 
-    public QuestionsServiceImpl(QuestionsDao dao, IOService ioService) {
+    public QuestionsServiceImpl(QuestionsDao dao, IOService ioService, PersonService personService) {
         this.dao = dao;
         this.ioService = ioService;
+        this.personService = personService;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     @Override
     public TestRun runQuestions() {
-        Person person = inputPerson();
+        Person person = personService.inputPerson();
         List<Question> questions = getQuestions();
         List<String> ioAnswers = new ArrayList<>();
         int cumulativeScore = 0;
@@ -91,12 +94,6 @@ public class QuestionsServiceImpl implements QuestionsService {
         int score = (int) round(rawScore > 0 ? rawScore : 0);
 
         return score;
-    }
-
-    private Person inputPerson() {
-        String firstName = ioService.readStringWithPrompt("Enter your first name:");
-        String lastName = ioService.readStringWithPrompt("Enter your last name:");
-        return new Person(firstName, lastName);
     }
 
     private String runQuestion(Question question) {
