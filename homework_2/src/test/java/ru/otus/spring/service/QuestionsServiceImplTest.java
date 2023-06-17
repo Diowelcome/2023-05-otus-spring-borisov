@@ -59,7 +59,7 @@ class QuestionsServiceImplTest {
                 "questions",
                 () -> assertEquals(questions.size(), 1, "should be 1 question"),
                 () -> assertEquals(questions.get(0).getAnswer(0).getRightFlag(), 1, "first question should be right"),
-                () -> assertEquals(questions.get(0).getAnswer(1).getRightFlag(), 0, "first question should be wrong")
+                () -> assertEquals(questions.get(0).getAnswer(1).getRightFlag(), 0, "second question should be wrong")
         );
     }
 
