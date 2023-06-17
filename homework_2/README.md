@@ -14,7 +14,7 @@
 	 
 2. Реализация слоев dao и service
      - QuestionDao: чтение и парсинг строки разделены на два шага
-	 - QuestionService: 
+     - QuestionService: 
          - getQuestions  - читает данные из dao
          - showQuestions - отображает полученные данные 
 		  
