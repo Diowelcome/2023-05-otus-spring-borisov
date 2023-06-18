@@ -62,13 +62,7 @@ public class TestRun {
     }
 
     private String getPassedString(Boolean testPassed) {
-        String passedString = new String();
-        if (testPassed) {
-            passedString = "Test is passed.";
-        } else {
-            passedString = "Test is not passed.";
-        }
-        return passedString;
+        return testPassed ? "Test is passed." : "Test is not passed.";
     }
 
 

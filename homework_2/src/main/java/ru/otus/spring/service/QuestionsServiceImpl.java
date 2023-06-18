@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Math.round;
 
 @Service
@@ -81,6 +82,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         int ioWrongCount = 0;
         while (matcher.find()) {
             answerIndex = Integer.parseInt(matcher.group()) - 1;
+            answerIndex = answerIndex < 0 ? MAX_VALUE : answerIndex;
             if (totalQuestionCount > answerIndex) {
                 if (question.getAnswer(answerIndex).getRightFlag() == 1) {
                     ioRightCount++;
