@@ -82,8 +82,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         int ioWrongCount = 0;
         while (matcher.find()) {
             answerIndex = Integer.parseInt(matcher.group()) - 1;
-            answerIndex = answerIndex < 0 ? MAX_VALUE : answerIndex;
-            if (totalQuestionCount > answerIndex) {
+            if (totalQuestionCount > answerIndex & answerIndex >=0) {
                 if (question.getAnswer(answerIndex).getRightFlag() == 1) {
                     ioRightCount++;
                 } else {
