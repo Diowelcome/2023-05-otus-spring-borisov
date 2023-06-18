@@ -49,14 +49,7 @@ public class TestRun {
     }
 
     private String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
-        String greetingFormat = new String();
-        if (goodResult) {
-            greetingFormat = "Congratulations, %s!";
-        } else if (!testPassed) {
-            greetingFormat = "Sorry, %s,";
-        } else {
-            greetingFormat = "%s,";
-        }
+        String greetingFormat = goodResult ? "Congratulations, %s!" :  !testPassed ?  "Sorry, %s," : "%s,";
         String greetingString = String.format(greetingFormat, person.getFirstName());
         return greetingString;
     }
