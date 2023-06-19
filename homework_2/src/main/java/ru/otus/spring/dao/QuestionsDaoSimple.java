@@ -18,13 +18,8 @@ import java.util.regex.Pattern;
 
 @Component
 public class QuestionsDaoSimple implements QuestionsDao {
-
+    @Value("${file.path}")
     private String fileName;
-
-    @Autowired
-    public void setFileName(@Value("${file.path}") String fileName) {
-        this.fileName = fileName;
-    }
 
     @Override
     public String getTestName() {
