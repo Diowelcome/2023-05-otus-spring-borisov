@@ -10,10 +10,6 @@ import ru.otus.spring.service.QuestionsService;
 public class Main {
 
     public static void main(String[] args) {
-        // Домашнее задание 1
-        // ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        // QuestionsService service = context.getBean(QuestionsService.class);
-        // service.showQuestions();
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         QuestionsService service = context.getBean(QuestionsService.class);
         service.showTestRunResults();

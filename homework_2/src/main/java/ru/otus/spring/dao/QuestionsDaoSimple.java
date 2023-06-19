@@ -42,7 +42,7 @@ public class QuestionsDaoSimple implements QuestionsDao {
         return questions;
     }
 
-    private List<String> getLines(String fileName) {
+    public static List<String> getLines(String fileName) {
         List<String> lines = new ArrayList<>();
         try {
             File file = new ClassPathResource(fileName).getFile();
@@ -57,7 +57,7 @@ public class QuestionsDaoSimple implements QuestionsDao {
         return lines;
     }
 
-    private List<Question> parseLines(List<String> lines, char delimiter, char answerDelimiter) {
+    public static List<Question> parseLines(List<String> lines, char delimiter, char answerDelimiter) {
         List<Question> questions = new ArrayList<>();
         for (String line : lines) {
             Question question = parseLine(line, delimiter, answerDelimiter);
@@ -66,7 +66,7 @@ public class QuestionsDaoSimple implements QuestionsDao {
         return questions;
     }
 
-    private Question parseLine(String line, char delimiter, char answerDelimiter) {
+    public static Question parseLine(String line, char delimiter, char answerDelimiter) {
         Pattern pattern = Pattern.compile("[^" + delimiter + "|$]+");
         Matcher matcher = pattern.matcher(line);
         boolean firstMatch = true;
@@ -83,7 +83,7 @@ public class QuestionsDaoSimple implements QuestionsDao {
         return new Question(question, answers);
     }
 
-    private Answer parseAnswer(String line, char answerDelimiter) {
+    public static Answer parseAnswer(String line, char answerDelimiter) {
         Pattern answerPattern = Pattern.compile("[^" + answerDelimiter + "|$]+");
         Matcher answerMatcher = answerPattern.matcher(line);
         Pattern flagPattern = Pattern.compile(answerDelimiter + "[0|1]");

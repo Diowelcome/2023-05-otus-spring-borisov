@@ -1,5 +1,6 @@
 package ru.otus.spring.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.dao.QuestionsDao;
 import ru.otus.spring.domain.Answer;
@@ -21,6 +22,12 @@ public class QuestionsServiceImpl implements QuestionsService {
     private final QuestionsDao dao;
     private final IOService ioService;
     private final PersonService personService;
+    @Value("${test.max.score}")
+    private int maxScore;
+    @Value("${test.min.passed}")
+    private int minPassedPercent;
+    @Value("${test.min.good}")
+    private int minGoodPercent;
 
     public QuestionsServiceImpl(QuestionsDao dao, IOService ioService, PersonService personService) {
         this.dao = dao;
@@ -38,7 +45,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         getQuestions().forEach(this::showQuestion);
     }
 
-    private void showQuestion(Question question) {
+    public void showQuestion(Question question) {
         ioService.outputString(question.toString());
     }
 
@@ -56,15 +63,16 @@ public class QuestionsServiceImpl implements QuestionsService {
         }
         int percentScore = round((float) cumulativeScore / questions.size());
         LocalDateTime endTime = LocalDateTime.now();
-        return new TestRun(dao.getTestName(),person,questions,ioAnswers,startTime,endTime,percentScore);
+        return new TestRun(dao.getTestName(), person, questions, ioAnswers, startTime, endTime, percentScore);
     }
 
     @Override
     public void showTestRunResults() {
-        ioService.outputString(runQuestions().getBriefResult());
+        TestRun testRun = runQuestions();
+        ioService.outputString(getBriefResult(testRun.getPerson(), testRun.getPercentScore()));
     }
 
-    private int calculatePercentScore(Question question, String ioAnswer) {
+    public static int calculatePercentScore(Question question, String ioAnswer) {
         int totalQuestionCount = 0;
         int rightQuestionCount = 0;
         for (Answer answer : question.getAnswers()) {
@@ -81,7 +89,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         int ioWrongCount = 0;
         while (matcher.find()) {
             answerIndex = Integer.parseInt(matcher.group()) - 1;
-            if (answerIndex >=0 && answerIndex < totalQuestionCount ) {
+            if (answerIndex >= 0 && answerIndex < totalQuestionCount) {
                 if (question.getAnswer(answerIndex).getRightFlag() == 1) {
                     ioRightCount++;
                 } else {
@@ -95,9 +103,34 @@ public class QuestionsServiceImpl implements QuestionsService {
         return score;
     }
 
-    private String runQuestion(Question question) {
+    public String runQuestion(Question question) {
         String typeYourAnswerString = "Type right number or numbers, separated by commas (for example: 1 or 1,3):";
         return ioService.readStringWithPrompt(String.format("%s\n%s", question.toString(), typeYourAnswerString));
+    }
+
+    public String getBriefResult(Person person, int percentScore) {
+        Boolean testPassed = percentScore >= minPassedPercent;
+        Boolean goodResult = percentScore >= minGoodPercent;
+        String greetingString = getGreetingString(person, testPassed, goodResult);
+        String scoreString = getScoreString(percentScore, maxScore);
+        String passedString = getPassedString(testPassed);
+        return greetingString + '\n' + scoreString + '\n' + passedString;
+    }
+
+    public static String getScoreString(int percentScore, int maxScore) {
+        int score = round((float) maxScore * percentScore / 100);
+        String scoreString = String.format("Your score: %d ( %d%% )", score, percentScore);
+        return scoreString;
+    }
+
+    public static String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
+        String greetingFormat = goodResult ? "Congratulations, %s!" : testPassed ? "%s," : "Sorry, %s,";
+        String greetingString = String.format(greetingFormat, person.getFirstName());
+        return greetingString;
+    }
+
+    private String getPassedString(Boolean testPassed) {
+        return testPassed ? "Test is passed." : "Test is not passed.";
     }
 
 }
