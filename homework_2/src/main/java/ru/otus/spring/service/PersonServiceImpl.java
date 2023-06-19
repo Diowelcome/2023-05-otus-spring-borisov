@@ -9,7 +9,6 @@ public class PersonServiceImpl implements PersonService {
 
     private final IOService ioService;
 
-    @Autowired
     public PersonServiceImpl(IOService ioService) {
         this.ioService = ioService;
     }
