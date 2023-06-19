@@ -20,6 +20,14 @@ public class Question {
         return answers.get(index);
     }
 
+    public int getRightAnswerCount() {
+        int rightAnswerCount = 0;
+        for (Answer answer : this.getAnswers()) {
+            rightAnswerCount += answer.getRightFlag();
+        }
+        return rightAnswerCount;
+    }
+
     @Override
     public String toString() {
         String answerString = new String();

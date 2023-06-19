@@ -39,7 +39,7 @@ class QuestionsDaoSimpleTest {
     @DisplayName("разбор ответа: отсутствие признака правильного ответа")
     @Test
     void shouldReturnDefaultWrongFlag() {
-        String answerWithoutFlag = "Answer with false wrong flag";
+        String answerWithoutFlag = "Answer without flag";
         Answer answer = QuestionsDaoSimple.parseAnswer(answerWithoutFlag, ':');
         assertEquals(answer.getAnswer(), answerWithoutFlag);
         assertEquals(answer.getRightFlag(), 0);
