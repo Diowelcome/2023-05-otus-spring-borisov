@@ -28,6 +28,10 @@ public class Question {
         return rightAnswerCount;
     }
 
+    public int getTotalAnswerCount() {
+        return this.answers.size();
+    }
+
     @Override
     public String toString() {
         String answerString = new String();

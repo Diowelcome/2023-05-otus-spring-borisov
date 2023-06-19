@@ -74,7 +74,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     public static int calculatePercentScore(Question question, String ioAnswer) {
         int rightQuestionCount = question.getRightAnswerCount();
-        int totalQuestionCount = question.getAnswers().size();
+        int totalQuestionCount = question.getTotalAnswerCount();
         float rightQuestionWeight = (float) 100 / rightQuestionCount;
         float wrongQuestionWeight = (float) 100 / (totalQuestionCount - rightQuestionCount);
 
