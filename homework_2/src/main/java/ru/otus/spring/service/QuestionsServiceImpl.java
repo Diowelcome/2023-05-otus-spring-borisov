@@ -114,13 +114,13 @@ public class QuestionsServiceImpl implements QuestionsService {
         return greetingString + '\n' + scoreString + '\n' + passedString;
     }
 
-    private static String getScoreString(int percentScore, int maxScore) {
+    private String getScoreString(int percentScore, int maxScore) {
         int score = round((float) maxScore * percentScore / 100);
         String scoreString = String.format("Your score: %d ( %d%% )", score, percentScore);
         return scoreString;
     }
 
-    private static String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
+    private String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
         String greetingFormat = goodResult ? "Congratulations, %s!" : testPassed ? "%s," : "Sorry, %s,";
         String greetingString = String.format(greetingFormat, person.getFirstName());
         return greetingString;
