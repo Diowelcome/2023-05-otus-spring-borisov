@@ -45,10 +45,6 @@ public class QuestionsServiceImpl implements QuestionsService {
         getQuestions().forEach(this::showQuestion);
     }
 
-    public void showQuestion(Question question) {
-        ioService.outputString(question.toString());
-    }
-
     @Override
     public TestRun runQuestions() {
         Person person = personService.inputPerson();
@@ -72,7 +68,12 @@ public class QuestionsServiceImpl implements QuestionsService {
         ioService.outputString(getBriefResult(testRun.getPerson(), testRun.getPercentScore()));
     }
 
-    public static int calculatePercentScore(Question question, String ioAnswer) {
+
+    private void showQuestion(Question question) {
+        ioService.outputString(question.toString());
+    }
+
+    private int calculatePercentScore(Question question, String ioAnswer) {
         int rightQuestionCount = question.getRightAnswerCount();
         int totalQuestionCount = question.getTotalAnswerCount();
         float rightQuestionWeight = (float) 100 / rightQuestionCount;
@@ -99,12 +100,12 @@ public class QuestionsServiceImpl implements QuestionsService {
         return score;
     }
 
-    public String runQuestion(Question question) {
+    private String runQuestion(Question question) {
         String typeYourAnswerString = "Type right number or numbers, separated by commas (for example: 1 or 1,3):";
         return ioService.readStringWithPrompt(String.format("%s\n%s", question.toString(), typeYourAnswerString));
     }
 
-    public String getBriefResult(Person person, int percentScore) {
+    private String getBriefResult(Person person, int percentScore) {
         Boolean testPassed = percentScore >= minPassedPercent;
         Boolean goodResult = percentScore >= minGoodPercent;
         String greetingString = getGreetingString(person, testPassed, goodResult);
@@ -113,13 +114,13 @@ public class QuestionsServiceImpl implements QuestionsService {
         return greetingString + '\n' + scoreString + '\n' + passedString;
     }
 
-    public static String getScoreString(int percentScore, int maxScore) {
+    private static String getScoreString(int percentScore, int maxScore) {
         int score = round((float) maxScore * percentScore / 100);
         String scoreString = String.format("Your score: %d ( %d%% )", score, percentScore);
         return scoreString;
     }
 
-    public static String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
+    private static String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
         String greetingFormat = goodResult ? "Congratulations, %s!" : testPassed ? "%s," : "Sorry, %s,";
         String greetingString = String.format(greetingFormat, person.getFirstName());
         return greetingString;

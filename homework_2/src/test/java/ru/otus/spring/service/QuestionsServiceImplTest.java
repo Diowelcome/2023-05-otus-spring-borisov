@@ -25,9 +25,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class QuestionsServiceImplTest {
 
-    private static final List<Question> testQuestions = new ArrayList<>();
-    private static final Person testPerson = new Person("Johnny", "Depp");
-    private static final int rightAnswerIndex = 1;
+    private List<Question> testQuestions = new ArrayList<>();
+    private Person testPerson = new Person("Johnny", "Depp");
+    private int rightAnswerIndex = 0;
 
     @Mock
     private IOService ioService;
@@ -43,10 +43,10 @@ class QuestionsServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        int rightAnswerIndex = 1;
-        Answer rightAnswer = new Answer("rightAnswer",1);
+        rightAnswerIndex = 2;
         Answer wrongAnswer = new Answer("WrongAnswer",0);
-        Question testQuestion = new Question("TestQuestion",List.of(rightAnswer, wrongAnswer));
+        Answer rightAnswer = new Answer("rightAnswer",1);
+        Question testQuestion = new Question("TestQuestion",List.of(wrongAnswer, rightAnswer));
         testQuestions.add(testQuestion);
     }
 
@@ -58,8 +58,8 @@ class QuestionsServiceImplTest {
         assertAll(
                 "questions",
                 () -> assertEquals(questions.size(), 1, "should be 1 question"),
-                () -> assertEquals(questions.get(0).getAnswer(0).getRightFlag(), 1, "first question should be right"),
-                () -> assertEquals(questions.get(0).getAnswer(1).getRightFlag(), 0, "second question should be wrong")
+                () -> assertEquals(questions.get(0).getAnswer(0).getRightFlag(), 0, "first question should be wrong"),
+                () -> assertEquals(questions.get(0).getAnswer(1).getRightFlag(), 1, "second question should be right")
         );
     }
 

@@ -20,6 +20,10 @@ public class Question {
         return answers.get(index);
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
     public int getRightAnswerCount() {
         int rightAnswerCount = 0;
         for (Answer answer : this.getAnswers()) {
