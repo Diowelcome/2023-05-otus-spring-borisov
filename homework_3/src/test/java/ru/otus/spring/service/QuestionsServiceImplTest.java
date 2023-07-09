@@ -28,12 +28,6 @@ class QuestionsServiceImplTest {
     private int rightAnswerIndex = 0;
 
     @Mock
-    private IOService ioService;
-
-    @Mock
-    private PersonService personService;
-
-    @Mock
     private QuestionsDao questionsDao;
 
     @InjectMocks
