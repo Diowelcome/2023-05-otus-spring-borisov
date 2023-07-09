@@ -115,7 +115,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     private String getScoreString(int percentScore, int maxScore) {
         int score = round((float) maxScore * percentScore / 100);
-        String scoreString = messageSource.getMessage("score", new String[]{Integer.toString(score), Integer.toString(percentScore)}, "Your score: {0} ( {1}% )", properties.getLocale());
+        String scoreString = messageSource.getMessage("score", new Object[]{score, percentScore}, "Your score: {0} ( {1}% )", properties.getLocale());
         return scoreString;
     }
 
