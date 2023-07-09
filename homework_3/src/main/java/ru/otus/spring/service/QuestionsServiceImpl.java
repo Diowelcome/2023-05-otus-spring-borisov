@@ -121,8 +121,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     private String getGreetingString(Person person, Boolean testPassed, Boolean goodResult) {
         String greetingCode = goodResult ? "congratulations" : testPassed ? "name" : "sorry";
-        String greetingString = messageSource.getMessage(greetingCode, new String[]{person.getFirstName()}, "{0}", properties.getLocale());
-        return greetingString;
+        return messageSource.getMessage(greetingCode, new String[]{person.getFirstName()}, "{0}", properties.getLocale());
     }
 
     private String getPassedString(Boolean testPassed) {
