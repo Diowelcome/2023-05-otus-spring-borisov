@@ -75,7 +75,7 @@ class QuestionsServiceImplTest {
         assertAll(
                 "testRun",
                 () -> assertEquals(testRun.getPerson().getFirstName(), testPerson.getFirstName(), "first name should match test first name"),
-                () -> assertEquals(testRun.getPerson().getLastName(), testPerson.getLastName(), "last name should match test first name"),
+                () -> assertEquals(testRun.getPerson().getLastName(), testPerson.getLastName(), "last name should match test last name"),
                 () -> assertEquals(testRun.getPercentScore(), 100, "percent score should be 100%")
         );
     }
