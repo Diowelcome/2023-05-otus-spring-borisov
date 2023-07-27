@@ -31,7 +31,7 @@ public class ParserCsv implements Parser {
     private Question parseLine(String line, String delimiter, String answerDelimiter) {
 
         String[] rawData = line.split(delimiter);
-        String question = localeService.getMessage(getBundleCode(rawData[0]), new String[]{""}, rawData[0]);
+        String question = localeService.getMessage(rawData[0], new String[]{""}, rawData[0]);
         List<Answer> answers = parseAnswers(Arrays.copyOfRange(rawData, 1, rawData.length), answerDelimiter);
         return new Question(question, answers);
 
@@ -47,16 +47,12 @@ public class ParserCsv implements Parser {
 
     private Answer parseAnswer(String line, String answerDelimiter) {
         String[] components = line.split(answerDelimiter);
-        String answer = localeService.getMessage(getBundleCode(components[0]), new String[]{""}, components[0]);
+        String answer = localeService.getMessage(components[0], new String[]{""}, components[0]);
         int rightFlag = 0;
         if (components.length == 2 && components[1].equals("1")) {
             rightFlag = 1;
         }
         return new Answer(answer, rightFlag);
-    }
-
-    private String getBundleCode(String message) {
-        return message.replaceAll(" ", ".");
     }
 
 }
