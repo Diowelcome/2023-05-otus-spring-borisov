@@ -1,0 +1,22 @@
+spring:
+  messages:
+    basename: "i18n/appmessages"
+    encoding: "UTF-8"
+  output:
+    ansi:
+      enabled: ALWAYS
+
+application:
+  data:
+    load:
+      source:
+        en: "/test.csv"
+        ru: "/test_ru.csv"
+    parse:
+      delimiter: ";"
+      answerdelimiter: ":"
+  test:
+    score: 5
+    passed: 50
+    good: 70
+  locale: ru

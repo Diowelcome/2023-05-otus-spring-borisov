@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ru.otus</groupId>
+	<artifactId>spring</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spring</name>
+	<description>Homework_4</description>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version>
+    </parent>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <spring.shell.version>3.1.2</spring.shell.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>${spring.shell.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>tinkoff-maven-snapshots-hosted</id>
+            <name>tinkoff-maven-snapshots-hosted</name>
+            <url>https://artifactory.tcsbank.ru/artifactory/maven-snapshots-hosted/prodsys</url>
+        </repository>
+        <repository>
+            <id>maven-all</id>
+            <name>Artifactory Repositories Proxy</name>
+            <url>https://artifactory.tcsbank.ru/artifactory/maven-all/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://artifactory.tcsbank.ru/artifactory/maven-all/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>jcenter</id>
+            <url>https://artifactory.tcsbank.ru/artifactory/maven-all/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
