@@ -1,5 +1,3 @@
-insert into persons (id, `name`)
-values (1, 'masha');
 insert into author (name)
 values ('Poe');
 insert into author (name)
