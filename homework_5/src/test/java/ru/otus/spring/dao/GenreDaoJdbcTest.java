@@ -51,8 +51,9 @@ class GenreDaoJdbcTest {
     @DisplayName("возвращать список всех жанров")
     @Test
     void shouldGetAll() {
+        List<Genre> testList = genreDao.getAll();
         Genre anotherTestGenre = genreDao.getByNameInsertNew("Another Test Genre");
-        List<Genre> testList = Arrays.asList(this.testGenre, anotherTestGenre);
+        testList.add(anotherTestGenre);
         List<Genre> actualList = genreDao.getAll();
         assertThat(actualList).isEqualTo(testList);
     }

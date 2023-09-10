@@ -47,9 +47,11 @@ class AuthorDaoJdbcTest {
     @DisplayName("возвращать список всех авторов")
     @Test
     void shouldGetAll() {
+        List<Author> testList = authorDao.getAll();
         Author testAuthor1 = authorDao.getByNameInsertNew("Test author 1");
         Author testAuthor2 = authorDao.getByNameInsertNew("Test author 2");
-        List<Author> testList = Arrays.asList(testAuthor1, testAuthor2);
+        testList.add(testAuthor1);
+        testList.add(testAuthor2);
         List<Author> actualList = authorDao.getAll();
         assertThat(actualList).isEqualTo(testList);
     }
