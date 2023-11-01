@@ -11,11 +11,9 @@ public interface CommentService {
 
     List<Comment> getAll();
 
-    void showComments();
+    Comment insert(Comment comment);
 
-    Comment insert();
+    Comment update(Comment comment);
 
-    Comment update();
-
-    void deleteById();
+    void delete(Comment comment);
 }

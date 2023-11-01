@@ -10,7 +10,7 @@ public interface AuthorRepository {
 
     Author getByName(String name);
 
-    Author getByNameInsertNew(String name);
+    Author insertByNameWithoutCheck(String name);
 
     List<Author> getAll();
 

@@ -11,7 +11,7 @@ public interface AuthorService {
 
     List<Author> getAll();
 
-    void showAll();
+    Author update(Author author);
 
-    Author update();
+    Author getAuthorByNameInsertNew(String authorName);
 }

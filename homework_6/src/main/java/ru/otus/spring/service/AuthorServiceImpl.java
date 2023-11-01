@@ -13,11 +13,9 @@ import java.util.Optional;
 @Service
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
-    private final IOService ioService;
 
     public AuthorServiceImpl(AuthorRepository authorRepository, IOService ioService) {
         this.authorRepository = authorRepository;
-        this.ioService = ioService;
     }
 
     @Override
@@ -42,32 +40,19 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void showAll() {
-        getAll().forEach(this::showAuthor);
+    @Transactional
+    public Author update(Author author) {
+        return authorRepository.update(author);
     }
 
     @Override
     @Transactional
-    public Author update() {
-        Long id = Long.valueOf(ioService.readStringWithPrompt("Enter author id:"));
-        Author author = authorRepository.getById(id).orElse(null);
-        if (author != null) {
-            showAuthor(author);
-            String newAuthorName = getValue("Enter new author name:", author.getName());
-            author = authorRepository.update(new Author(author.getId(), newAuthorName));
-            showAuthor(author);
-        } else {
-            ioService.outputString("Such author does not exist");
+    public Author getAuthorByNameInsertNew(String authorName) {
+        Author author = authorRepository.getByName(authorName);
+        if (author == null) {
+            author = authorRepository.insertByNameWithoutCheck(authorName);
         }
         return author;
     }
 
-    private void showAuthor(Author author) {
-        ioService.outputString(author.toString());
-    }
-
-    private String getValue(String prompt, String defaultValue) {
-        String result = ioService.readStringWithPrompt(prompt);
-        return result.trim().length() > 0 ? result : defaultValue;
-    }
 }

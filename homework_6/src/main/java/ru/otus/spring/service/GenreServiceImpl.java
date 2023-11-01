@@ -11,11 +11,9 @@ import java.util.Optional;
 @Service
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
-    private final IOService ioService;
 
     public GenreServiceImpl(GenreRepository genreRepository, IOService ioService) {
         this.genreRepository = genreRepository;
-        this.ioService = ioService;
     }
 
     @Override
@@ -31,33 +29,20 @@ public class GenreServiceImpl implements GenreService {
         List<Genre> genres = genreRepository.getAll();
         return genres;
     }
+
     @Override
-    public void showAll() {
-        getAll().forEach(this::showGenre);
+    @Transactional
+    public Genre update(Genre genre) {
+        return genreRepository.update(genre);
     }
 
     @Override
     @Transactional
-    public Genre update() {
-        Long id = Long.valueOf(ioService.readStringWithPrompt("Enter author id:"));
-        Genre genre = genreRepository.getById(id).orElse(null);
-        if (genre != null) {
-            showGenre(genre);
-            String newGenreName = getValue("Enter new author name:", genre.getName());
-            genre = genreRepository.update(new Genre(genre.getId(), newGenreName));
-            showGenre(genre);
-        } else {
-            ioService.outputString("Such author does not exist");
+    public Genre getGenreByNameInsertNew(String genreName) {
+        Genre genre = genreRepository.getByName(genreName);
+        if (genre == null) {
+            genre = genreRepository.insertByNameWithoutCheck(genreName);
         }
         return genre;
-    }
-
-    private void showGenre(Genre genre) {
-        ioService.outputString(genre.toString());
-    }
-
-    private String getValue(String prompt, String defaultValue) {
-        String result = ioService.readStringWithPrompt(prompt);
-        return result.trim().length() > 0 ? result : defaultValue;
     }
 }

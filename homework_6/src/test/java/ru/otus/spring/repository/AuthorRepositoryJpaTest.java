@@ -22,7 +22,7 @@ class AuthorRepositoryJpaTest {
     @DisplayName("возвращать ожидаемого автора по его id")
     @Test
     void shouldGetById() {
-        Author testAuthor = authorRepository.getByNameInsertNew("Test author");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test author");
         Author actualAuthor = authorRepository.getById(testAuthor.getId()).orElse(null);
         assertThat(actualAuthor).usingRecursiveComparison().isEqualTo(testAuthor);
     }
@@ -30,16 +30,16 @@ class AuthorRepositoryJpaTest {
     @DisplayName("возвращать ожидаемого автора по его имени")
     @Test
     void shouldGetByName() {
-        Author testAuthor = authorRepository.getByNameInsertNew("Test author");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test author");
         Author actualAuthor = authorRepository.getByName(testAuthor.getName());
         assertThat(actualAuthor).usingRecursiveComparison().isEqualTo(testAuthor);
     }
 
     @DisplayName("добавлять автора в базу")
     @Test
-    void shouldGetByNameInsertNew() {
+    void shouldinsertByNameWithoutCheck() {
         String testName = "Test author";
-        Author testAuthor = authorRepository.getByNameInsertNew(testName);
+        Author testAuthor = authorRepository.insertByNameWithoutCheck(testName);
         assertThat(testAuthor.getName()).isEqualTo(testName);
     }
 
@@ -47,8 +47,8 @@ class AuthorRepositoryJpaTest {
     @Test
     void shouldGetAll() {
         List<Author> testList = authorRepository.getAll();
-        Author testAuthor1 = authorRepository.getByNameInsertNew("Test author 1");
-        Author testAuthor2 = authorRepository.getByNameInsertNew("Test author 2");
+        Author testAuthor1 = authorRepository.insertByNameWithoutCheck("Test author 1");
+        Author testAuthor2 = authorRepository.insertByNameWithoutCheck("Test author 2");
         testList.add(testAuthor1);
         testList.add(testAuthor2);
         List<Author> actualList = authorRepository.getAll();
@@ -59,7 +59,7 @@ class AuthorRepositoryJpaTest {
     @Test
     void shouldUpdate() {
         String updatedName = "Updated author name";
-        Author testAuthor = authorRepository.getByNameInsertNew("Test author");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test author");
         Author updatedAuthor = new Author(testAuthor.getId(), updatedName);
         authorRepository.update(updatedAuthor);
         Author actualAuthor = authorRepository.getById(testAuthor.getId()).orElse(null);

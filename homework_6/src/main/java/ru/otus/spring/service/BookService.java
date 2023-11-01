@@ -5,13 +5,15 @@ import ru.otus.spring.domain.Book;
 import java.util.List;
 
 public interface BookService {
+    Book getById(Long id);
+
+    Book getByTitle(String title);
+
     List<Book> getAll();
 
-    void showAll();
+    Book insert(Book book);
 
-    Book insert();
+    Book update(Book book);
 
-    Book update();
-
-    void delete();
+    void delete(Book book);
 }

@@ -1,9 +1,7 @@
 package ru.otus.spring.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +21,8 @@ public class Comment {
     @Column(name = "text", nullable = false, unique = false)
     private String text;
 
-    @ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name = "book_id")
     private Book book;
+
 }

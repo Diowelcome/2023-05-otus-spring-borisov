@@ -10,7 +10,7 @@ public interface GenreRepository {
 
     Genre getByName(String name);
 
-    Genre getByNameInsertNew(String name);
+    Genre insertByNameWithoutCheck(String name);
 
     List<Genre> getAll();
 

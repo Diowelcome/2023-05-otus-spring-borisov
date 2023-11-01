@@ -2,7 +2,6 @@ package ru.otus.spring.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.domain.Book;
@@ -35,7 +34,7 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public List<Book> getAll() {
-        TypedQuery<Book> query = em.createQuery("select distinct b from Book b left join fetch b.author left join fetch b.genre", Book.class);
+        TypedQuery<Book> query = em.createQuery("select b from Book b", Book.class);
         return query.getResultList();
     }
 
@@ -52,16 +51,11 @@ public class BookRepositoryJpa implements BookRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        deleteCommentCascade(id);
-        Query query = em.createQuery("delete from Book b where b.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+    public void delete(Book book) {
+        book = getById(book.getId()).orElse(null);
+        if (book != null) {
+            em.remove(book);
+        }
     }
 
-    private void deleteCommentCascade(Long id) {
-        Query query = em.createQuery("delete from Comment c where c.book.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
-    }
 }

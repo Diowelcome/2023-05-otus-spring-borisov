@@ -33,12 +33,9 @@ public class GenreRepositoryJpa implements GenreRepository {
     }
 
     @Override
-    public Genre getByNameInsertNew(String name) {
-        Genre genre = getByName(name);
-        if (genre == null) {
-            genre = new Genre(0, name);
-            em.persist(genre);
-        }
+    public Genre insertByNameWithoutCheck(String name) {
+        Genre genre = new Genre(0, name);
+        em.persist(genre);
         return genre;
     }
 

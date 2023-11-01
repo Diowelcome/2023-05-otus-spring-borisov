@@ -22,7 +22,7 @@ class GenreRepositoryJpaTest {
     @DisplayName("возвращать ожидаемый жанр по его id")
     @Test
     void shouldGetById() {
-        Genre testGenre = genreRepository.getByNameInsertNew("Test genre");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test genre");
         Genre actualGenre = genreRepository.getById(testGenre.getId()).orElse(null);
         assertThat(actualGenre).usingRecursiveComparison().isEqualTo(testGenre);
     }
@@ -30,25 +30,25 @@ class GenreRepositoryJpaTest {
     @DisplayName("возвращать ожидаемый жанр по его названию")
     @Test
     void shouldGetByName() {
-        Genre testGenre = genreRepository.getByNameInsertNew("Test genre");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test genre");
         Genre actualGenre = genreRepository.getByName(testGenre.getName());
         assertThat(actualGenre).usingRecursiveComparison().isEqualTo(testGenre);
     }
 
     @DisplayName("добавлять жанр в базу")
     @Test
-    void shouldGetByNameInsertNew() {
+    void shouldinsertByNameWithoutCheck() {
         String testGenreName = "Test genre";
-        Genre testGenre = genreRepository.getByNameInsertNew(testGenreName);
+        Genre testGenre = genreRepository.insertByNameWithoutCheck(testGenreName);
         assertThat(testGenre.getName()).isEqualTo(testGenreName);
     }
 
     @DisplayName("возвращать список всех жанров")
     @Test
     void shouldGetAll() {
-        Genre testGenre = genreRepository.getByNameInsertNew("Test genre");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test genre");
         List<Genre> testList = genreRepository.getAll();
-        Genre anotherTestGenre = genreRepository.getByNameInsertNew("Another Test Genre");
+        Genre anotherTestGenre = genreRepository.insertByNameWithoutCheck("Another Test Genre");
         testList.add(anotherTestGenre);
         List<Genre> actualList = genreRepository.getAll();
         assertThat(actualList).isEqualTo(testList);
@@ -57,7 +57,7 @@ class GenreRepositoryJpaTest {
     @DisplayName("корректно изменять название жанра")
     @Test
     void shouldUpdate() {
-        Genre testGenre = genreRepository.getByNameInsertNew("Test genre");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test genre");
         String updatedName = "Updated Genre name";
         Genre updatedGenre = new Genre(testGenre.getId(), updatedName);
         genreRepository.update(updatedGenre);

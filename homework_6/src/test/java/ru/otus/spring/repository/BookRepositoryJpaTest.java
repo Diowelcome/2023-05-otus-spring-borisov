@@ -9,6 +9,7 @@ import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Genre;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,8 +33,8 @@ class BookRepositoryJpaTest {
     @Test
     void shouldGetById() {
         String testTitle = "Test title";
-        Author testAuthor = authorRepository.getByNameInsertNew("Test Author");
-        Genre testGenre = genreRepository.getByNameInsertNew("Test Genre");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
         Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
         actualBook = bookRepository.insert(actualBook);
         Long testId = actualBook.getId();
@@ -45,8 +46,8 @@ class BookRepositoryJpaTest {
     @Test
     void shouldGetByTitle() {
         String testTitle = "Test title";
-        Author testAuthor = authorRepository.getByNameInsertNew("Test Author");
-        Genre testGenre = genreRepository.getByNameInsertNew("Test Genre");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
         Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
         actualBook = bookRepository.insert(actualBook);
         Long testId = actualBook.getId();
@@ -59,8 +60,8 @@ class BookRepositoryJpaTest {
     void shouldGetAll() {
         String testTitle1 = "Test title 1";
         String testTitle2 = "Test title 2";
-        Author testAuthor = authorRepository.getByNameInsertNew("Test Author");
-        Genre testGenre = genreRepository.getByNameInsertNew("Test Genre");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
         Book book1 = new Book(0, testTitle1, testAuthor, testGenre);
         Book book2 = new Book(0, testTitle2, testAuthor, testGenre);
         book1 = bookRepository.insert(book1);
@@ -76,8 +77,8 @@ class BookRepositoryJpaTest {
     @Test
     void shouldInsert() {
         String testTitle = "Test title";
-        Author testAuthor = authorRepository.getByNameInsertNew("Test Author");
-        Genre testGenre = genreRepository.getByNameInsertNew("Test Genre");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
         Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
         actualBook = bookRepository.insert(actualBook);
         Book expectedBook = new Book(actualBook.getId(), testTitle, testAuthor, testGenre);
@@ -89,10 +90,10 @@ class BookRepositoryJpaTest {
     void update() {
         String testTitle = "Test title";
         String updatedTitle = "Updated title";
-        Author testAuthor1 = authorRepository.getByNameInsertNew("Test author 1");
-        Author testAuthor2 = authorRepository.getByNameInsertNew("Test author 2");
-        Genre testGenre1 = genreRepository.getByNameInsertNew("Test genre 1");
-        Genre testGenre2 = genreRepository.getByNameInsertNew("Test genre 2");
+        Author testAuthor1 = authorRepository.insertByNameWithoutCheck("Test author 1");
+        Author testAuthor2 = authorRepository.insertByNameWithoutCheck("Test author 2");
+        Genre testGenre1 = genreRepository.insertByNameWithoutCheck("Test genre 1");
+        Genre testGenre2 = genreRepository.insertByNameWithoutCheck("Test genre 2");
         Book originalBook = new Book(0, testTitle, testAuthor1, testGenre1);
         originalBook = bookRepository.insert(originalBook);
         Book updatedBook = new Book(originalBook.getId(), updatedTitle, testAuthor2, testGenre2);
@@ -106,13 +107,13 @@ class BookRepositoryJpaTest {
     void shouldDelete() {
 
         String testTitle = "Test title";
-        Author testAuthor = authorRepository.getByNameInsertNew("Test Author");
-        Genre testGenre = genreRepository.getByNameInsertNew("Test Genre");
+        Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
+        Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
         Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
         actualBook = bookRepository.insert(actualBook);
         Book insertedBook = new Book(actualBook.getId(), testTitle, testAuthor, testGenre);
         assertThat(actualBook).usingRecursiveComparison().isEqualTo(insertedBook);
-        bookRepository.delete(actualBook.getId());
+        bookRepository.delete(actualBook);
         assertThat(bookRepository.getByTitle(testTitle)).isEqualTo(null);
     }
 }

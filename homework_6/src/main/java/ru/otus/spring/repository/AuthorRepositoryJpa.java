@@ -33,12 +33,9 @@ public class AuthorRepositoryJpa implements AuthorRepository {
     }
 
     @Override
-    public Author getByNameInsertNew(String name) {
-        Author author = getByName(name);
-        if (author == null) {
-            author = new Author(0, name);
-            em.persist(author);
-        }
+    public Author insertByNameWithoutCheck(String name) {
+        Author author = new Author(0, name);
+        em.persist(author);
         return author;
     }
 
