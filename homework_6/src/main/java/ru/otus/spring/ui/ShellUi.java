@@ -207,7 +207,7 @@ public class ShellUi {
         return result.trim().length() > 0 ? result : defaultValue;
     }
 
-    public void showComments() {
+    private void showComments() {
         String inputId = ioService.readStringWithPrompt("Enter book id for exact book comments or null for all comments:");
         Book book = getBookByInputId(inputId);
         if (book != null) {
