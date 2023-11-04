@@ -8,8 +8,6 @@ import java.util.Optional;
 public interface CommentRepository {
     Optional<Comment> getById(Long id);
 
-    List<Comment> getByBookId(Long bookId);
-
     List<Comment> getAll();
 
     Comment insert(Comment name);
