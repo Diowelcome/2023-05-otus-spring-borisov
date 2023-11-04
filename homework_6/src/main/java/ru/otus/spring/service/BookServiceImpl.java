@@ -1,5 +1,6 @@
 package ru.otus.spring.service;
 
+import jakarta.persistence.NoResultException;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import ru.otus.spring.repository.CommentRepository;
 import ru.otus.spring.repository.GenreRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Service
@@ -29,7 +31,14 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public Book getById(Long id) {
-        return bookRepository.getById(id).orElse(null);
+        Optional<Book> optionalBook;
+        try {
+            optionalBook = bookRepository.getById(id);
+            optionalBook.ifPresent(book -> book.getComments().size());
+        } catch (NoResultException e) {
+            return null;
+        }
+        return optionalBook.orElse(null);
     }
 
     @Override
@@ -60,7 +69,6 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void delete(Book book) {
-        commentRepository.deleteByBookId(book.getId());
         bookRepository.delete(book);
     }
 

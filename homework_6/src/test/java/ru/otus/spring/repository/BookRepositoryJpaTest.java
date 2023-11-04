@@ -35,10 +35,10 @@ class BookRepositoryJpaTest {
         String testTitle = "Test title";
         Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
         Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
-        Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
+        Book actualBook = new Book(0, testTitle, testAuthor, testGenre, new ArrayList<>());
         actualBook = bookRepository.insert(actualBook);
         Long testId = actualBook.getId();
-        Book expectedBook = new Book(testId, testTitle, testAuthor, testGenre);
+        Book expectedBook = new Book(testId, testTitle, testAuthor, testGenre, new ArrayList<>());
         assertThat(actualBook).usingRecursiveComparison().isEqualTo(expectedBook);
     }
 
@@ -48,10 +48,10 @@ class BookRepositoryJpaTest {
         String testTitle = "Test title";
         Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
         Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
-        Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
+        Book actualBook = new Book(0, testTitle, testAuthor, testGenre, new ArrayList<>());
         actualBook = bookRepository.insert(actualBook);
         Long testId = actualBook.getId();
-        Book expectedBook = new Book(testId, testTitle, testAuthor, testGenre);
+        Book expectedBook = new Book(testId, testTitle, testAuthor, testGenre, new ArrayList<>());
         assertThat(actualBook).usingRecursiveComparison().isEqualTo(expectedBook);
     }
 
@@ -62,8 +62,8 @@ class BookRepositoryJpaTest {
         String testTitle2 = "Test title 2";
         Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
         Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
-        Book book1 = new Book(0, testTitle1, testAuthor, testGenre);
-        Book book2 = new Book(0, testTitle2, testAuthor, testGenre);
+        Book book1 = new Book(0, testTitle1, testAuthor, testGenre, new ArrayList<>());
+        Book book2 = new Book(0, testTitle2, testAuthor, testGenre, new ArrayList<>());
         book1 = bookRepository.insert(book1);
         book2 = bookRepository.insert(book2);
         Book testBook1 = bookRepository.getByTitle("Test title 1");
@@ -79,9 +79,9 @@ class BookRepositoryJpaTest {
         String testTitle = "Test title";
         Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
         Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
-        Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
+        Book actualBook = new Book(0, testTitle, testAuthor, testGenre, new ArrayList<>());
         actualBook = bookRepository.insert(actualBook);
-        Book expectedBook = new Book(actualBook.getId(), testTitle, testAuthor, testGenre);
+        Book expectedBook = new Book(actualBook.getId(), testTitle, testAuthor, testGenre, new ArrayList<>());
         assertThat(actualBook).usingRecursiveComparison().isEqualTo(expectedBook);
     }
 
@@ -94,9 +94,9 @@ class BookRepositoryJpaTest {
         Author testAuthor2 = authorRepository.insertByNameWithoutCheck("Test author 2");
         Genre testGenre1 = genreRepository.insertByNameWithoutCheck("Test genre 1");
         Genre testGenre2 = genreRepository.insertByNameWithoutCheck("Test genre 2");
-        Book originalBook = new Book(0, testTitle, testAuthor1, testGenre1);
+        Book originalBook = new Book(0, testTitle, testAuthor1, testGenre1, new ArrayList<>());
         originalBook = bookRepository.insert(originalBook);
-        Book updatedBook = new Book(originalBook.getId(), updatedTitle, testAuthor2, testGenre2);
+        Book updatedBook = new Book(originalBook.getId(), updatedTitle, testAuthor2, testGenre2, new ArrayList<>());
         bookRepository.update(updatedBook);
         Book actualBook = bookRepository.getByTitle(updatedTitle);
         assertThat(actualBook).usingRecursiveComparison().isEqualTo(updatedBook);
@@ -109,9 +109,9 @@ class BookRepositoryJpaTest {
         String testTitle = "Test title";
         Author testAuthor = authorRepository.insertByNameWithoutCheck("Test Author");
         Genre testGenre = genreRepository.insertByNameWithoutCheck("Test Genre");
-        Book actualBook = new Book(0, testTitle, testAuthor, testGenre);
+        Book actualBook = new Book(0, testTitle, testAuthor, testGenre, new ArrayList<>());
         actualBook = bookRepository.insert(actualBook);
-        Book insertedBook = new Book(actualBook.getId(), testTitle, testAuthor, testGenre);
+        Book insertedBook = new Book(actualBook.getId(), testTitle, testAuthor, testGenre, new ArrayList<>());
         assertThat(actualBook).usingRecursiveComparison().isEqualTo(insertedBook);
         bookRepository.delete(actualBook);
         assertThat(bookRepository.getByTitle(testTitle)).isEqualTo(null);

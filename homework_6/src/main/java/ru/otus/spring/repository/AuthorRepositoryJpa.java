@@ -3,13 +3,13 @@ package ru.otus.spring.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.domain.Author;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Component
 public class AuthorRepositoryJpa implements AuthorRepository {
     @PersistenceContext
     private final EntityManager em;

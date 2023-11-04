@@ -1,5 +1,6 @@
 package ru.otus.spring.service;
 
+import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface CommentService {
     Comment getById(Long id);
 
-    List<Comment> getByBookId(Long bookId);
+    List<Comment> getByBook(Book book);
 
     List<Comment> getAll();
 

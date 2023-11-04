@@ -19,7 +19,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Author getById(Long id) {
         Optional<Author> author = authorRepository.getById(id);
         return author.orElse(null);
@@ -33,7 +32,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Author> getAll() {
         List<Author> authors = authorRepository.getAll();
         return authors;

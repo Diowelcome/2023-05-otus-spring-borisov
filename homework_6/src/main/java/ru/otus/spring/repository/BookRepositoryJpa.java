@@ -3,13 +3,13 @@ package ru.otus.spring.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.domain.Book;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Component
 public class BookRepositoryJpa implements BookRepository {
     @PersistenceContext
     private final EntityManager em;
@@ -20,7 +20,8 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public Optional<Book> getById(Long id) {
-        return Optional.ofNullable(em.find(Book.class, id));
+        Book book = em.find(Book.class, id);
+        return Optional.ofNullable(book);
     }
 
     @Override

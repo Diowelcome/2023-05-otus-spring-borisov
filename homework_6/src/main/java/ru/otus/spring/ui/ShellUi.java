@@ -10,6 +10,8 @@ import ru.otus.spring.domain.Comment;
 import ru.otus.spring.domain.Genre;
 import ru.otus.spring.service.*;
 
+import java.util.ArrayList;
+
 
 @ShellComponent
 public class ShellUi {
@@ -28,7 +30,6 @@ public class ShellUi {
         this.ioService = ioService;
     }
 
-    @Transactional(readOnly = true)
     @ShellMethod(value = "List table content (l table_name or simply l - for table list)", key = {"l", "list"})
     public void list(@ShellOption(defaultValue = "null") String tableName) {
         if (tableName.equals("author")) {
@@ -154,7 +155,7 @@ public class ShellUi {
             String genreName = ioService.readStringWithPrompt("Enter genre name:");
             Author author = authorService.getAuthorByNameInsertNew(authorName);
             Genre genre = genreService.getGenreByNameInsertNew(genreName);
-            book = new Book(0, title, author, genre);
+            book = new Book(0, title, author, genre, new ArrayList<>());
             book = bookService.insert(book);
             ioService.outputString(book.toString());
         } else {
@@ -173,7 +174,7 @@ public class ShellUi {
             String genreName = getValue("Enter new genre name or none for the current value:", book.getGenre().getName());
             Author author = authorService.getAuthorByNameInsertNew(authorName);
             Genre genre = genreService.getGenreByNameInsertNew(genreName);
-            Book updatedBook = new Book(id, title, author, genre);
+            Book updatedBook = new Book(id, title, author, genre, new ArrayList<>());
 
             book = bookService.update(updatedBook);
             ioService.outputString(book.toString());
@@ -211,7 +212,7 @@ public class ShellUi {
         String inputId = ioService.readStringWithPrompt("Enter book id for exact book comments or null for all comments:");
         Book book = getBookByInputId(inputId);
         if (book != null) {
-            commentService.getByBookId(book.getId()).forEach(this::showComment);
+            commentService.getByBook(book).forEach(this::showComment);
         } else {
             commentService.getAll().forEach(this::showComment);
         }

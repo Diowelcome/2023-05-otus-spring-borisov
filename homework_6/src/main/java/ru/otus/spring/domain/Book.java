@@ -1,7 +1,14 @@
 package ru.otus.spring.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +30,13 @@ public class Book {
     @ManyToOne(targetEntity = Genre.class)
     @JoinColumn(name = "genre_id")
     private Genre genre;
+
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Book(id=" + id + ", title=" + title + ", author=" + author.toString() + ", genre=" + genre.toString() + ")";
+    }
 }

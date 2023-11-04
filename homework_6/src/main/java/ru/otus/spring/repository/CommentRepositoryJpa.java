@@ -1,7 +1,10 @@
 package ru.otus.spring.repository;
 
-import jakarta.persistence.*;
-import org.springframework.stereotype.Repository;
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.domain.Comment;
 
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.Optional;
 
 import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
 
-@Repository
+@Component
 public class CommentRepositoryJpa implements CommentRepository {
     @PersistenceContext
     private final EntityManager em;
@@ -57,13 +60,6 @@ public class CommentRepositoryJpa implements CommentRepository {
         if (comment != null) {
             em.remove(comment);
         }
-    }
-
-    @Override
-    public void deleteByBookId(Long bookId) {
-        Query query = em.createQuery("delete from Comment c where c.book.id = :id");
-        query.setParameter("id", bookId);
-        query.executeUpdate();
     }
 
 }

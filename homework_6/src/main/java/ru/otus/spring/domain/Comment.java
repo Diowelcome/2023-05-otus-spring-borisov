@@ -25,4 +25,9 @@ public class Comment {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @Override
+    public String toString() {
+        return "Comment(id=" + id + ", nickname=" + nickname + ", text=" + text + ", book(id=" + book.getId() + ", title=" + book.getTitle() + "))" ;
+    }
+
 }

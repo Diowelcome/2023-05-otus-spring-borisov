@@ -17,14 +17,12 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Genre getById(Long id) {
         Optional<Genre> genre = genreRepository.getById(id);
         return genre.orElse(null);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Genre> getAll() {
         List<Genre> genres = genreRepository.getAll();
         return genres;
