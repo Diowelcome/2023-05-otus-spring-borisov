@@ -25,7 +25,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Author getByName(String name) {
         Author author = authorRepository.getByName(name);
         return author;
