@@ -29,7 +29,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Comment> getByBook(Book book) {
         return book.getComments();
     }

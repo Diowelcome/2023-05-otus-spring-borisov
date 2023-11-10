@@ -42,13 +42,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Book getByTitle(String title) {
         return bookRepository.findByTitle(title);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Book> getAll() {
         List<Book> books = bookRepository.findAll();
         return books;
